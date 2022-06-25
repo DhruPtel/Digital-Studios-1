@@ -1,0 +1,26 @@
+.App {
+  background-color: #000000;
+  text-align: center;
+}
+
+.ant-divider {
+  width: 80%;
+  height: 3px;
+  background-color: white;
+}
+
+.card {
+  width: 14rem;
+  color: white;
+  border: 0.1rem solid;
+  border-radius: 0.9rem;
+  height: 26rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  cursor: help;
+}
+
+.card-text {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
