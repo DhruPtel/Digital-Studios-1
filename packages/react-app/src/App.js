@@ -8,6 +8,10 @@ import logo from "./DigitalStudio1.png";
 import exp1 from "./Experience#1.png";
 import exp2 from "./Experience#2.png";
 import exp3 from "./Experience#3.png";
+import scene from "./forestNeon7.png";
+import lake from "./lake.png";
+import enlight from "./logo.png";
+import videoBg from "./Haza.mp4";
 import { Divider } from "antd";
 import { Card } from "react-bootstrap";
 import "./App.css";
@@ -15,8 +19,11 @@ import "./App.css";
 import { addresses, abis } from "@my-app/contracts";
 import GET_TRANSFERS from "./graphql/subgraph";
 
-function WalletButton() {
+function App() {
+  // Read more about useDapp on https://usedapp.io/
   const [rendered, setRendered] = useState("");
+  const [test, setTest] = useState(false);
+  const [showVideo, setVideo] = useState(false);
 
   const ens = useLookupAddress();
   const { account, activateBrowserWallet, deactivate, error } = useEthers();
@@ -26,6 +33,11 @@ function WalletButton() {
       setRendered(ens);
     } else if (account) {
       setRendered(shortenAddress(account));
+      setTest(true);
+      setVideo(true);
+      setInterval(() => {
+        setVideo(false);
+      }, 4000);
     } else {
       setRendered("");
     }
@@ -37,24 +49,8 @@ function WalletButton() {
     }
   }, [error]);
 
-  return (
-    <Button
-      onClick={() => {
-        if (!account) {
-          activateBrowserWallet();
-        } else {
-          deactivate();
-        }
-      }}
-    >
-      {rendered === "" && "Connect Wallet"}
-      {rendered !== "" && rendered}
-    </Button>
-  );
-}
+  console.log(test);
 
-function App() {
-  // Read more about useDapp on https://usedapp.io/
   const { error: contractCallError, value: tokenBalance } =
     useCall({
        contract: new Contract(addresses.ceaErc20, abis.erc20),
@@ -74,57 +70,141 @@ function App() {
     }
   }, [loading, subgraphQueryError, data]);
 
-  return (
-    <div className="App">
-      <Header>
-        <WalletButton />
-      </Header>
-      <Body>
-        <Image src={logo} alt="ethereum-logo" />
-        <Divider />
-      </Body>
-      <Container>
-        <Link href="https://www.dior.com/en_us/fashion">
-          <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={exp1} />
-            <Card.Body>
-              <Card.Title>???????</Card.Title>
-              <Card.Text>
-                ???? ????? ??????? ???? ?? ????? ?? ??? ???? ????? ??? ???? ?? ??? ???? ??
-                ??? ????'? ???????.
-              </Card.Text>
-              <Button variant="primary">???</Button>
-            </Card.Body>
-          </Card>
-        </Link>
-        <Link href="https://www.streetfighter.com/en/">
-          <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={exp2} />
-            <Card.Body>
-              <Card.Title>?????????</Card.Title>
-              <Card.Text>
-                ??????????? ???? ??? ??????? ??? ??? ?????????? ?? ??????????? ?? ??????.
-              </Card.Text>
-              <Button variant="primary">???</Button>
-            </Card.Body>
-          </Card>
-        </Link>
-        <Link href="https://www.oxfordlearnersdictionaries.com/us/definition/american_english/empathy#:~:text=noun-,noun,empathy%20(between%20A%20and%20B)" >
-          <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={exp3} />
-            <Card.Body>
-              <Card.Title>???????</Card.Title>
-              <Card.Text>
-                ???? ????? ??? ???? ?? ??? ?? ????? ???? ????? ??? ???? ?? ??? ???? ??'?
-                ???? ????; ???, ???, ???.
-              </Card.Text>
-              <Button href="https://www.dior.com/en_us" variant="primary">???</Button>
-            </Card.Body>
-          </Card>
-        </Link>
-      </Container>
-    </div>
-  );
+  if(!test) {
+    return (
+      <div className="App">
+        <Header>
+          <Button
+            onClick={() => {
+              if (!account) {
+                activateBrowserWallet();
+                console.log(rendered);
+              } else {
+                deactivate();
+                console.log(rendered);
+              }
+            }}
+          >
+            {rendered === "" && "Connect Wallet"}
+            {rendered !== "" && rendered}
+          </Button>
+        </Header>
+        <Body>
+          <Image src={logo} alt="ethereum-logo" />
+          <Divider />
+        </Body>
+        <Container className="bobert">
+          <Link href="https://www.dior.com/en_us/fashion">
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={exp1} />
+              <Card.Body>
+                <Card.Title>???????</Card.Title>
+                <Card.Text>
+                  ???? ????? ??????? ???? ?? ????? ?? ??? ???? ????? ??? ???? ?? ??? ???? ??
+                  ??? ????'? ???????.
+                </Card.Text>
+                <Button variant="primary">???</Button>
+              </Card.Body>
+            </Card>
+          </Link>
+          <Link href="https://www.streetfighter.com/en/">
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={exp2} />
+              <Card.Body>
+                <Card.Title>?????????</Card.Title>
+                <Card.Text>
+                  ??????????? ???? ??? ??????? ??? ??? ?????????? ?? ??????????? ?? ??????.
+                </Card.Text>
+                <Button variant="primary">???</Button>
+              </Card.Body>
+            </Card>
+          </Link>
+          <Link href="https://www.oxfordlearnersdictionaries.com/us/definition/american_english/empathy#:~:text=noun-,noun,empathy%20(between%20A%20and%20B)" >
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={exp3} />
+              <Card.Body>
+                <Card.Title>???????</Card.Title>
+                <Card.Text>
+                  ???? ????? ??? ???? ?? ??? ?? ????? ???? ????? ??? ???? ?? ??? ???? ??'?
+                  ???? ????; ???, ???, ???.
+                </Card.Text>
+                <Button href="https://www.dior.com/en_us" variant="primary">???</Button>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Container>
+      </div>
+    );
+  } else {
+    return (
+      <div className="App">
+        <Body>
+          {showVideo && <video src={videoBg} autoPlay loop muted />}
+          <img src={scene} className="forest" />
+        </Body>
+        <img src={enlight} alt="logo" className="logo" />
+        <div className="buttonHolder">
+          <Button
+            onClick={() => {
+              if (!account) {
+                activateBrowserWallet();
+                console.log(rendered);
+              } else {
+                deactivate();
+                console.log(rendered);
+              }
+            }}
+          >
+            {rendered === "" && "Connect Wallet"}
+            {rendered !== "" && rendered}
+          </Button>
+        </div>
+        <Container style={{
+          backgroundImage: `url(${lake})`,
+          backgroundSize: 'cover'
+        }}>
+          <Link href="https://www.dior.com/en_us/fashion">
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={exp1} />
+              <Card.Body>
+                <Card.Title>???????</Card.Title>
+                <Card.Text>
+                  ???? ????? ??????? ???? ?? ????? ?? ??? ???? ????? ??? ???? ?? ??? ???? ??
+                  ??? ????'? ???????.
+                </Card.Text>
+                <Button variant="primary">???</Button>
+              </Card.Body>
+            </Card>
+          </Link>
+          <Link href="https://www.streetfighter.com/en/">
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={exp2} />
+              <Card.Body>
+                <Card.Title>?????????</Card.Title>
+                <Card.Text>
+                  ??????????? ???? ??? ??????? ??? ??? ?????????? ?? ??????????? ?? ??????.
+                </Card.Text>
+                <Button variant="primary">???</Button>
+              </Card.Body>
+            </Card>
+          </Link>
+          <Link href="https://www.oxfordlearnersdictionaries.com/us/definition/american_english/empathy#:~:text=noun-,noun,empathy%20(between%20A%20and%20B)" >
+            <Card style={{ width: '18rem' }}>
+              <Card.Img variant="top" src={exp3} />
+              <Card.Body>
+                <Card.Title>???????</Card.Title>
+                <Card.Text>
+                  ???? ????? ??? ???? ?? ??? ?? ????? ???? ????? ??? ???? ?? ??? ???? ??'?
+                  ???? ????; ???, ???, ???.
+                </Card.Text>
+                <Button href="https://www.dior.com/en_us" variant="primary">???</Button>
+              </Card.Body>
+            </Card>
+          </Link>
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default App;

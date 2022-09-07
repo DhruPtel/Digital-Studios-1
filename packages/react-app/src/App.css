@@ -24,3 +24,33 @@
   margin-top: 5rem;
   margin-bottom: 5rem;
 }
+
+.forest {
+  width: 100%;
+  height: auto;
+  margin-top: -50px;
+}
+
+.buttonHolder {
+  height: 10px;
+  margin-bottom: 50px;
+  margin-top: -40px;
+}
+
+.logo {
+  height: 65vmin;
+  margin-top: -20vmin;
+  width: 65vw;
+}
+
+video {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 800px) {
+  .bobert {
+    flex-direction: column;
+    margin-top: 20rem;
+  }
+}

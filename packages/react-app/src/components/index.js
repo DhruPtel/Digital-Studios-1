@@ -43,7 +43,7 @@ export const Header = styled.header`
 `;
 
 export const Image = styled.img`
-  height: 65vmin;
+  height: 63vmin;
   margin-bottom: 16px;
   pointer-events: none;
 `;
